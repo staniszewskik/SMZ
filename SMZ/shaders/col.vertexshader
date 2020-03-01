@@ -1,0 +1,10 @@
+#version 330 core
+layout (location = 0) in vec3 aVert;
+layout (location = 1) in vec3 aNorm;
+
+uniform mat4 mvp;
+
+void main()
+{
+    gl_Position = mvp * vec4(aVert, 1.0);
+}

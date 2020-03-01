@@ -1,0 +1,14 @@
+#version 330 core
+out vec4 FragColor;
+
+in vec2 texCoord;
+
+uniform sampler2D interfaceTexture;
+
+void main()
+{             
+    vec4 texColor = textureLod(interfaceTexture, texCoord, 0.0);
+    if(texColor.a < 0.1)
+        discard;
+    FragColor = texColor;
+}

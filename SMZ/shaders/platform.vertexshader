@@ -1,0 +1,34 @@
+#version 330 core
+layout (location = 0) in vec3 aVert;
+layout (location = 1) in vec2 aTexCoord;
+layout (location = 2) in vec3 aNorm;
+layout (location = 3) in vec4 aHighlight;
+
+#define CASCADE_COUNT 6
+
+out vec2 texCoord;
+out vec3 FragPos;
+out vec3 Normal;
+out vec4 highlight;
+out vec4 FragPosLightSpace[CASCADE_COUNT];
+out float ClipSpacePosZ;
+
+uniform mat4 mdel;
+uniform mat4 VP;
+uniform mat3 norm; // transpose(inverse(mdel)) i ucieta ostatnia kolumna i wiersz zeby na pozwalac na translacje
+uniform mat4 lightSpaceMatrix[CASCADE_COUNT];
+
+void main()
+{
+    gl_Position = VP * mdel * vec4(aVert, 1.0);
+	texCoord = aTexCoord;
+	FragPos = vec3(mdel * vec4(aVert, 1.0));
+	Normal = norm * aNorm;
+	highlight = aHighlight;
+
+	for(int i = 0; i < CASCADE_COUNT; ++i)
+	{
+		FragPosLightSpace[i] = lightSpaceMatrix[i] * vec4(FragPos, 1.0);
+	}
+	ClipSpacePosZ = gl_Position.z;
+}
