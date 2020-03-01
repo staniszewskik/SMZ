@@ -1,6 +1,8 @@
 # SMZ
 Very much WIP! Download the zip file from the latest release, unpack it and run SMZ.exe to check it out.
 
+![screenshot_crop](https://raw.githubusercontent.com/staniszewskik/SMZ/master/screenshot_crop.png)
+
 Controls:
 - **W A S D** and the **mouse** to walk and look around
 - **Spacebar** to jump (if you are touching the ground or a wall)
